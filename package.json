@@ -1,0 +1,10 @@
+{
+  "name": "RasPlayer",
+  "version": "0.1.0",
+  "description": "Raspberry Pi video player for installations",
+  "dependencies": {
+    "omxdirector": "^0.1.2"
+  },
+  "repository": "https://www.github.com/Niksko/RasPlayer.git",
+  "license": "GNU GPL v3"
+}
