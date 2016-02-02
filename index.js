@@ -8,5 +8,10 @@ var serveIndex = require('serve-index');
 
 var omx = require('omxdirector');
 
-app.use('/', serveIndex('/files', {'icons': true}));
+// Add all of our routes
+require('./routes.js')(app);
+
+// Serve folders from the file structure using serveIndex
+app.use('/files', serveIndex('/', {'icons': true,
+                                   'template': 'public/directory.html'}));
 http.listen(3000);
