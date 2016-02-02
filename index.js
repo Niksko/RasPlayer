@@ -12,6 +12,6 @@ var omx = require('omxdirector');
 require('./routes.js')(app);
 
 // Serve folders from the file structure using serveIndex
-app.use('/files', serveIndex('/', {'icons': true,
-                                   'template': 'public/directory.html'}));
+app.use('/', serveIndex('/', {'icons': true,
+                              'template': 'public/directory.html'}));
 http.listen(3000);
