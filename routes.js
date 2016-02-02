@@ -10,6 +10,11 @@ module.exports = function(app) {
     res.sendFile(__dirname + '/public/directory-style.css');
   });
 
+  // Set up a route for the index
+  app.get('/public/directory.js', function(req, res){
+    res.sendFile(__dirname + '/public/directory.js');
+  });
+
   // Set up a route for jquery using express-jquery
   app.use(require('express-jquery')('/jquery.js'));
 
