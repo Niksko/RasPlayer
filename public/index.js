@@ -8,17 +8,6 @@ $(document).ready(function(){
   });
   $( "#sortable li" ).disableSelection();
 
-  // Allow the checkbox state to determine whether the list items are sortable
-  $("div#file-list ul li").click(function(){
-    $(this).toggleClass('ui-state-disabled');
-
-    // Make the ul sortable based on new disable items
-    $( "#sortable" ).sortable({
-      items: "li:not(.ui-state-disabled)"
-    });
-    $( "#sortable li" ).disableSelection();
-  });
-
   // Function for extracting query variables from the url
   // Taken from https://stackoverflow.com/questions/2090551/parse-query-string-in-javascript
   function getQueryVariable(variable) {
@@ -39,7 +28,7 @@ $(document).ready(function(){
 
   // Add a handler for the button which requests the folder list
   $("button#file-list").click(function(){
-    socket.emit('get-files');
+    socket.emit('get-files', folder);
   });
 
   // Handle the response from the server with the file list
@@ -47,10 +36,21 @@ $(document).ready(function(){
     // Remove all elements from the list
     $("div#file-list ul").empty();
     // Create the required li entries for files in the list
-    for (el in fileArray) {
-      var listItem = "<li class='ui-state-default'>" + el + "</li>"
+    for (var i=0; i < fileArray.length; i++) {
+      var listItem = "<li class='ui-state-default'>" + fileArray[i]+ "</li>"
       $("div#file-list ul").append(listItem);
     };
+
+    // Allow the clicking on the list items to toggle whether they are sortable
+    $("div#file-list ul li").click(function(){
+      $(this).toggleClass('ui-state-disabled');
+
+      // Make the ul sortable based on new disable items
+      $( "#sortable" ).sortable({
+        items: "li:not(.ui-state-disabled)"
+      });
+      $( "#sortable li" ).disableSelection();
+    });
   });
 
   // Add a handler for the folder select button to take you to the folder browser
