@@ -3,12 +3,29 @@
     <head>
         <title>RasPlayer</title>
         <script src="/jquery.js"></script>
+        <script src="/jquery-ui.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script src="/public/index.js"></script>
+        <script>
+          $(function() {
+            $( "#sortable" ).sortable({
+              items: "li:not(.ui-state-disabled)"
+            });
+         
+            $( "#sortable li" ).disableSelection();
+          });
+        </script>
         <link rel="stylesheet" type="text/css" href="/public/index.css">
     </head>
     <body>
         <input id="folder" type="text"></input>
-        <button id="folder-select">Select a folder</button>
+        <button id="folder-select">Choose folder</button>
+        <button id="file-list">Get file list</button>
+        <div id="file-list">
+            <ul id=sortable>
+                <li class='ui-state-default'>foo</li>
+                <li class='ui-state-default'>bar</li>
+            </ul>
+        </div>
     </body>
 </html>

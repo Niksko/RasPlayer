@@ -20,6 +20,22 @@ $(document).ready(function(){
   var folder = getQueryVariable('folder');
   $("input#folder").val(folder);
 
+  // Add a handler for the button which requests the folder list
+  $("button#file-list").click(function(){
+    socket.emit('get-files');
+  });
+
+  // Handle the response from the server with the file list
+  socket.on('file-list', function(fileArray){
+    // Remove all elements from the list
+    $("div#file-list ul").empty();
+    // Create the required li entries for files in the list
+    for (el in fileArray) {
+      var listItem = "<li class='ui-state-default'>" + el + "</li>"
+      $("div#file-list ul").append(listItem);
+    };
+  });
+
   // Add a handler for the folder select button to take you to the folder browser
   $("button#folder-select").click(function(){
     window.location.replace("/");

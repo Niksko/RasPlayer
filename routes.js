@@ -35,4 +35,9 @@ module.exports = function(app) {
     res.sendFile(__dirname + '/bower_components/jquery/dist/jquery.min.js');
   });
 
+  // Set up a route for jquery
+  app.get('/jquery-ui.js', function(req, res){
+    res.sendFile(__dirname + '/bower_components/jquery-ui/jquery-ui.min.js');
+  });
+
 };
