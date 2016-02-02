@@ -2,6 +2,23 @@ $(document).ready(function(){
   // Obtain socket
   var socket = io();
 
+  // Make the ul sortable
+  $( "#sortable" ).sortable({
+    items: "li:not(.ui-state-disabled)"
+  });
+  $( "#sortable li" ).disableSelection();
+
+  // Allow the checkbox state to determine whether the list items are sortable
+  $("div#file-list ul li").click(function(){
+    $(this).toggleClass('ui-state-disabled');
+
+    // Make the ul sortable based on new disable items
+    $( "#sortable" ).sortable({
+      items: "li:not(.ui-state-disabled)"
+    });
+    $( "#sortable li" ).disableSelection();
+  });
+
   // Function for extracting query variables from the url
   // Taken from https://stackoverflow.com/questions/2090551/parse-query-string-in-javascript
   function getQueryVariable(variable) {
