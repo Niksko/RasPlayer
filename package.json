@@ -4,7 +4,6 @@
   "description": "Raspberry Pi video player for installations",
   "dependencies": {
     "express": "^4.13.4",
-    "express-jquery": "^1.8.3",
     "http": "0.0.0",
     "omxdirector": "^0.1.2",
     "serve-index": "^1.7.3",

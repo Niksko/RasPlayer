@@ -1,0 +1,19 @@
+{
+  "name": "RasPlayer",
+  "description": "Raspberry Pi video player for installations",
+  "main": "index.js",
+  "authors": [
+    "Nikolas Skoufis <n.skoufis@gmail.com>"
+  ],
+  "license": "GPL-3.0",
+  "homepage": "https://github.com/Niksko/RasPlayer",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

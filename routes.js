@@ -15,7 +15,9 @@ module.exports = function(app) {
     res.sendFile(__dirname + '/public/directory.js');
   });
 
-  // Set up a route for jquery using express-jquery
-  app.use(require('express-jquery')('/jquery.js'));
+  // Set up a route for jquery
+  app.get('/jquery.js', function(req, res){
+    res.sendFile(__dirname + '/bower_components/jquery/dist/jquery.min.js');
+  });
 
 };
