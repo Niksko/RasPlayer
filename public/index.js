@@ -1,4 +1,7 @@
 $(document).ready(function(){
+  // Obtain socket
+  var socket = io();
+
   // Function for extracting query variables from the url
   // Taken from https://stackoverflow.com/questions/2090551/parse-query-string-in-javascript
   function getQueryVariable(variable) {
@@ -13,7 +16,7 @@ $(document).ready(function(){
       console.log('Query variable %s not found', variable);
   };
 
+  // Extract the folder from the query string and set the h1 text based on it's value
   var folder = getQueryVariable('folder');
-  console.log(folder);
   $("h1").text(folder);
 });
