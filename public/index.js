@@ -18,5 +18,10 @@ $(document).ready(function(){
 
   // Extract the folder from the query string and set the h1 text based on it's value
   var folder = getQueryVariable('folder');
-  $("h1").text(folder);
+  $("input#folder").val(folder);
+
+  // Add a handler for the folder select button to take you to the folder browser
+  $("button#folder-select").click(function(){
+    window.location.replace("/");
+  });
 });

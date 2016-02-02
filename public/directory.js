@@ -3,6 +3,6 @@ $(document).ready(function() {
   $("button.select").click(function(){
     // Note we are selecting the final link in the header and extracting it's link location
     var folder = encodeURIComponent($("h1 a:last-child").attr('href'));
-    window.location.replace("/?folder=" + folder);
+    window.location.replace("/index.html?folder=" + folder);
   });
 });

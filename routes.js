@@ -6,7 +6,7 @@
 module.exports = function(app) {
 
   // Set up a route for the index
-  app.get('/', function(req, res){
+  app.get('/index.html', function(req, res){
     res.sendFile(__dirname + '/public/index.html');
   });
 

@@ -15,4 +15,10 @@ require('./routes.js')(app);
 app.use('/', serveIndex('/', {'icons': true,
                               'template': 'public/directory.html'}));
 
-http.listen(3000);
+io.on('connection', function (socket){
+  console.log('client connected');
+});
+
+http.listen(3000, function(){
+  console.log('listening on localhost:3000');
+});
