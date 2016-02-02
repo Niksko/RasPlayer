@@ -6,11 +6,26 @@
 module.exports = function(app) {
 
   // Set up a route for the index
+  app.get('/', function(req, res){
+    res.sendFile(__dirname + '/public/index.html');
+  });
+
+  // Set up a route for the index js
+  app.get('/public/index.js', function(req, res){
+    res.sendFile(__dirname + '/public/index.js');
+  });
+
+  // Set up a route for the index css
+  app.get('/public/index.css', function(req, res){
+    res.sendFile(__dirname + '/public/index.css');
+  });
+
+  // Set up a route for the directory browser style
   app.get('/public/directory-style.css', function(req, res){
     res.sendFile(__dirname + '/public/directory-style.css');
   });
 
-  // Set up a route for the index
+  // Set up a route for the directory browser js
   app.get('/public/directory.js', function(req, res){
     res.sendFile(__dirname + '/public/directory.js');
   });

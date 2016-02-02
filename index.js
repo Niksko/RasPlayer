@@ -15,12 +15,4 @@ require('./routes.js')(app);
 app.use('/', serveIndex('/', {'icons': true,
                               'template': 'public/directory.html'}));
 
-// Listen for folder selects and log them
-io.on('connection', function(socket){
-  socket.on('folder-select', function(data){
-    console.log('got folder select');
-    console.log('data ' + data);
-  });
-});
-
 http.listen(3000);
