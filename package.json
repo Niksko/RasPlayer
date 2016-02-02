@@ -6,6 +6,7 @@
     "express": "^4.13.4",
     "http": "0.0.0",
     "omxdirector": "^0.1.2",
+    "serve-index": "^1.7.3",
     "socket.io": "^1.4.5"
   },
   "repository": "https://www.github.com/Niksko/RasPlayer.git",
