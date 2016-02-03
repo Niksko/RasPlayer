@@ -11,14 +11,15 @@ $(document).ready(function(){
     // If the player is not loaded
     if (response.loaded === false) {
       // Disable the stop and pause buttons
-      $("button#pause").addClass('disabled');
-      $("button#stop").addClass('disabled');
+      $("button#play").removeAttr('disabled');
+      $("button#pause").attr('disabled', 'disabled');
+      $("button#stop").attr('disabled', 'disabled');
     }
     else if (response.playing === true) {
       // Disable the play button, enable stop and pause
-      $("button#play").addClass('disabled');
-      $("button#pause").removeClass('disabled');
-      $("button#stop").removeClass('disabled');
+      $("button#play").attr('disabled', 'disabled');
+      $("button#pause").removeAttr('disabled');
+      $("button#stop").removeAttr('disabled');
 
       // Ensure the loop checkbox reflects the current state
       if (response.options.loop === true){
@@ -41,9 +42,10 @@ $(document).ready(function(){
     else {
       // response.playing must be false
       // Enable the play button, disable pause and stop
-      $("button#play").removeClass('disabled');
-      $("button#pause").addClass('disabled');
-      $("button#stop").addClass('disabled');
+      $("button#play").removeAttr('disabled');
+      $("button#pause").attr('disabled', 'disabled');
+      $("button#stop").attr('disabled', 'disabled');
+
     };
   });
 
@@ -97,4 +99,6 @@ $(document).ready(function(){
   $("button#folder-select").click(function(){
     window.location.replace("/filesystem");
   });
+
+  // Add a handler 
 });
