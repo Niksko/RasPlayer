@@ -9,6 +9,9 @@ const fs = require('fs');
 
 var omx = require('omxdirector').enableNativeLoop();
 
+// Set up the path to the delay video
+const delayVideoPath == __dirname + '/public/delay.mpeg'
+
 // Add all of our routes
 require('./routes.js')(app);
 
@@ -51,10 +54,31 @@ io.on('connection', function (socket){
     var statusResponse = omx.getStatus();
     // If either we're playing or we're stopped
     if (statusResponse.loaded === false || statusResponse.playing === true){
-      // Set the video directory based on the folder from the response object
-      omx.setVideoDir(response.folder);
+      // Create a new array to store the playlist
+      var playlist = [];
+      // Join all of the filenames with the chosen directory and put them on the playlist
+      response.playlist.each(function(idx, val){
+        playlist.push(response.folder + val);
+      });
+      // If the delay is not empty
+      if (response.delay !== ''){
+        // We have to insert delays into the playlist
+        // Get the amount of time requested
+        delayTime = Math.ceil(parseInt(response.delay));
+        // Create a new array to store the playlist with inserted blank videos
+        var playlistWithDelays = [];
+        playlist.each(function(idx, value){
+          // For each element in the playlist, push the correct number of delay videos onto the playlist
+          playlistWithDelays.push(value);
+          for (var i = 0; i < delayTime; i++){
+            playlistWithDelays.push(delayVideoPath);
+          };
+        });
+        // Finally swap the new playlist for the old one
+        playlist = playlistWithDelays;
+      };
       // Start playing
-      omx.play(response.playlist, {loop: response.loop, audioOutput: response.audioOutput});
+      omx.play(playlist, {loop: response.loop, audioOutput: response.audioOutput, letterbox: true});
     }
     // We're paused, so just unpause
     else {

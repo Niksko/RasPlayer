@@ -124,11 +124,12 @@ $(document).ready(function(){
         playList.push($(li).text());
       };
     });
-    // Finally, push the list to the backend, along with the loop status and audio option
+    // Finally, push the list to the backend, along with the loop status, audio option and delay time
     var loopStatus = $("#loop-checkbox").is(':checked');
     var audioSelect = $("#audio-select").val();
+    var delayTime = $("#delay").val();
     var folder = $("input#folder").val();
-    var returnObj = {playlist: playList, loop: loopStatus, folder: folder, audioOutput: audioSelect};
+    var returnObj = {playlist: playList, loop: loopStatus, folder: folder, audioOutput: audioSelect, delay: delayTime};
     socket.emit('play', returnObj);
   });
 
