@@ -15,6 +15,7 @@ $(document).ready(function(){
       $("button#pause").attr('disabled', 'disabled');
       $("button#stop").attr('disabled', 'disabled');
     }
+    // If the player is loaded, and we're playing
     else if (response.playing === true) {
       // Disable the play button, enable stop and pause
       $("button#play").attr('disabled', 'disabled');
@@ -40,11 +41,11 @@ $(document).ready(function(){
       }
     }
     else {
-      // response.playing must be false
-      // Enable the play button, disable pause and stop
+      // response.playing must be false, which means we're paused
+      // Enable the play and stop buttons, disable pause
       $("button#play").removeAttr('disabled');
+      $("button#stop").removeAttr('disabled');
       $("button#pause").attr('disabled', 'disabled');
-      $("button#stop").attr('disabled', 'disabled');
 
     };
   });
@@ -100,5 +101,35 @@ $(document).ready(function(){
     window.location.replace("/filesystem");
   });
 
-  // Add a handler 
+  // Add a handler for the play button
+  $("button#play").click(function(){
+    // Make an empty list
+    var playList = [];
+    // Get the list of files
+    var $fileList = $("div#file-list ul li");
+    // For each of them
+    $fileList.each(function(idx, li){
+      // If the item is not disabled
+      if($(li).hasClass('ui-state-disabled') === false){
+        // Push it onto the list
+        playList.push($(li).text());
+      };
+    });
+    // Finally, push the list to the backend, along with the loop status
+    var loopStatus = $("#loop-checkbox").checked;
+    var folder = $("input#folder").val();
+    var returnObj = {playlist: playList, loop: loopStatus, folder: folder};
+    socket.emit('play', returnObj);
+  });
+
+  // Add a handler for the pause button
+  #("button#pause").click(function(){
+    socket.emit('pause');
+  });
+
+  // Add a handler for the stop button
+  #("button#stop").click(function(){
+    socket.emit('stop');
+  });
+
 });

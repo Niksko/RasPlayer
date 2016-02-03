@@ -42,13 +42,47 @@ io.on('connection', function (socket){
 
   // Listen for status requests
   socket.on('get-status', function(){
-    // Get status and respond via socket
-    console.log('got status request');
-    var response = omx.getStatus();
-    socket.emit('status', response);
+    sendStatus(omx, socket);
   });
+
+  // Listen for play requests
+  socket.on('play', function(response){
+    // Get the player status
+    var statusResponse = omx.getStatus();
+    // If either we're playing or we're stopped
+    if (statusResponse.loaded === false || statusResponse.playing === true){
+      // Set the video directory based on the folder from the response object
+      omx.setVideoDir(response.folder);
+      // Start playing
+      omx.play(response.playlist, {loop: response.loop});
+    }
+    // We're paused, so just unpause
+    else {
+      omx.pause();
+    };
+    // Update frontend status
+    sendStatus(omx, socket);
+  });
+
+  // Listen for stop requests
+  socket.on('stop', function(){
+    omx.stop();
+    sendStatus(omx, socket);
+  });
+
+  // Listen for pause requests
+  socket.on('pause', function(){
+    omx.pause();
+    sendStatus(omx, socket);
+  })
 });
 
 http.listen(3000, function(){
   console.log('listening on localhost:3000');
 });
+
+function sendStatus(omx, socket) {
+    // Get status and respond via socket
+    var response = omx.getStatus();
+    socket.emit('status', response);
+}
