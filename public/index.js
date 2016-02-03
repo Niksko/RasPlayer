@@ -3,6 +3,12 @@ $(document).ready(function(){
   // Connect to backend socket 
   var socket = io();
 
+  // Make the unsorted list of items sortable
+  $( "#sortable" ).sortable({
+    items: "li:not(.ui-state-disabled)"
+  });
+  $( "#sortable li" ).disableSelection();
+
   // Get the status of the video player from the backend
   socket.emit('get-status');
 
