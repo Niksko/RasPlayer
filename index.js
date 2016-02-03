@@ -13,7 +13,7 @@ var omx = require('omxdirector');
 require('./routes.js')(app);
 
 // Serve folders from the file structure using serveIndex
-app.use('/', serveIndex('/', {'icons': true,
+app.use('/filesystem', serveIndex('/', {'icons': true,
                               'template': 'public/directory.html'}));
 
 io.on('connection', function (socket){

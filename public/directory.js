@@ -1,8 +1,11 @@
 $(document).ready(function() {
   // If the select button is clicked, redirect with query string
   $("button.select").click(function(){
-    // Note we are selecting the final link in the header and extracting it's link location
-    var folder = encodeURIComponent($("h1 a:last-child").attr('href'));
-    window.location.replace("/index.html?folder=" + folder);
+    // Get the current folder location based on the link associated with the breadcrumbs at the top of the page
+    var folderLink = $("h1 a:last-child").attr('href');
+    // Strip the opening part of the url because this is just based on the web route
+    var folderPath = folderLink.replace('/filesystem', '');
+    var folderQueryString = encodeURIComponent(folderPath);
+    window.location.replace("/?folder=" + folderQueryString);
   });
 });

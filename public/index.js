@@ -55,6 +55,6 @@ $(document).ready(function(){
 
   // Add a handler for the folder select button to take you to the folder browser
   $("button#folder-select").click(function(){
-    window.location.replace("/");
+    window.location.replace("/filesystem");
   });
 });
