@@ -125,7 +125,7 @@ $(document).ready(function(){
       };
     });
     // Finally, push the list to the backend, along with the loop status
-    var loopStatus = $("#loop-checkbox").checked;
+    var loopStatus = $("#loop-checkbox").is(':checked');
     var folder = $("input#folder").val();
     var returnObj = {playlist: playList, loop: loopStatus, folder: folder};
     socket.emit('play', returnObj);
