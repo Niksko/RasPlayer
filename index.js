@@ -14,13 +14,14 @@ require('./routes.js')(app);
 
 // Serve folders from the file structure using serveIndex
 app.use('/filesystem', serveIndex('/', {'icons': true,
-                              'template': 'public/directory.html'}));
+                              'template': 'public/filesystem-browser.html'}));
 
 io.on('connection', function (socket){
   console.log('client connected');
 
   // Listen for file grab messages
   socket.on('get-files', function(folder){
+    // Fetch the file list
     var fileList = fs.readdir(folder, function(err, files){
       if (err){
         console.log(err);
@@ -33,6 +34,7 @@ io.on('connection', function (socket){
             fileArray.push(item);
           }
         });
+        // Send these back to the frontend
         socket.emit('file-list', fileArray);
       };
     });

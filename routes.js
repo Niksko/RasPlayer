@@ -21,13 +21,13 @@ module.exports = function(app) {
   });
 
   // Set up a route for the directory browser style
-  app.get('/public/directory-style.css', function(req, res){
-    res.sendFile(__dirname + '/public/directory-style.css');
+  app.get('/public/filesystem-browser.css', function(req, res){
+    res.sendFile(__dirname + '/public/filesystem-browser.css');
   });
 
   // Set up a route for the directory browser js
-  app.get('/public/directory.js', function(req, res){
-    res.sendFile(__dirname + '/public/directory.js');
+  app.get('/public/filesystem-browser.js', function(req, res){
+    res.sendFile(__dirname + '/public/filesystem-browser.js');
   });
 
   // Set up a route for jquery
