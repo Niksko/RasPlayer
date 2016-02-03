@@ -74,6 +74,9 @@ $(document).ready(function(){
   var folder = getQueryVariable('folder');
   $("input#folder").val(folder);
 
+  // Click the get files button
+  $("button#file-list").trigger('click');
+
   // Add a handler for the button which requests the folder list
   $("button#file-list").click(function(){
     socket.emit('get-files', folder);
