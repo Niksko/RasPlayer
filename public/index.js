@@ -123,12 +123,12 @@ $(document).ready(function(){
   });
 
   // Add a handler for the pause button
-  #("button#pause").click(function(){
+  $("button#pause").click(function(){
     socket.emit('pause');
   });
 
   // Add a handler for the stop button
-  #("button#stop").click(function(){
+  $("button#stop").click(function(){
     socket.emit('stop');
   });
 
