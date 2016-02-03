@@ -57,7 +57,7 @@ io.on('connection', function (socket){
       // Create a new array to store the playlist
       var playlist = [];
       // Join all of the filenames with the chosen directory and put them on the playlist
-      response.playlist.forEach(function(idx, val){
+      response.playlist.forEach(function(val){
         playlist.push(response.folder + val);
       });
       // If the delay is not empty
@@ -67,7 +67,7 @@ io.on('connection', function (socket){
         delayTime = Math.ceil(parseInt(response.delay));
         // Create a new array to store the playlist with inserted blank videos
         var playlistWithDelays = [];
-        playlist.forEach(function(idx, value){
+        playlist.forEach(function(value){
           // For each element in the playlist, push the correct number of delay videos onto the playlist
           playlistWithDelays.push(value);
           for (var i = 0; i < delayTime; i++){
