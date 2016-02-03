@@ -54,7 +54,7 @@ io.on('connection', function (socket){
       // Set the video directory based on the folder from the response object
       omx.setVideoDir(response.folder);
       // Start playing
-      omx.play(response.playlist, {loop: response.loop});
+      omx.play(response.playlist, {loop: response.loop, audioOutput: response.audioOutput});
     }
     // We're paused, so just unpause
     else {

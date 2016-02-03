@@ -124,10 +124,11 @@ $(document).ready(function(){
         playList.push($(li).text());
       };
     });
-    // Finally, push the list to the backend, along with the loop status
+    // Finally, push the list to the backend, along with the loop status and audio option
     var loopStatus = $("#loop-checkbox").is(':checked');
+    var audioSelect = $("#audio-select").val();
     var folder = $("input#folder").val();
-    var returnObj = {playlist: playList, loop: loopStatus, folder: folder};
+    var returnObj = {playlist: playList, loop: loopStatus, folder: folder, audioOutput: audioSelect};
     socket.emit('play', returnObj);
   });
 
