@@ -60,21 +60,28 @@ io.on('connection', function (socket){
     else {
       omx.pause();
     };
-    // Update frontend status
-    sendStatus(omx, socket);
   });
 
   // Listen for stop requests
   socket.on('stop', function(){
     omx.stop();
-    sendStatus(omx, socket);
   });
 
   // Listen for pause requests
   socket.on('pause', function(){
     omx.pause();
+  });
+
+  // Listen for play, pause and stop actions on the omx and send status updates to the frontend
+  omx.on('play', function(){
     sendStatus(omx, socket);
-  })
+  });
+  omx.on('stop', function(){
+    sendStatus(omx, socket);
+  });
+  omx.on('pause', function(){
+    sendStatus(omx, socket);
+  });
 });
 
 http.listen(3000, function(){
