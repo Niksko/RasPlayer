@@ -58,7 +58,7 @@ io.on('connection', function (socket){
     }
     // We're paused, so just unpause
     else {
-      omx.pause();
+      omx.play();
     };
   });
 
