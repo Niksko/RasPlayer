@@ -58,7 +58,7 @@ io.on('connection', function (socket){
       var playlist = [];
       // Join all of the filenames with the chosen directory and put them on the playlist
       response.playlist.forEach(function(val){
-        playlist.push(response.folder + val);
+        playlist.push(response.folder + '/' + val);
       });
       // If the delay is not empty
       if (response.delay !== ''){
