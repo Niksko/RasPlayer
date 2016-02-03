@@ -7,7 +7,7 @@ var io = require('socket.io')(http);
 var serveIndex = require('serve-index');
 const fs = require('fs');
 
-var omx = require('omxdirector');
+var omx = require('omxdirector').enableNativeLoop();
 
 // Add all of our routes
 require('./routes.js')(app);
