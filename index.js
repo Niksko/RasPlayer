@@ -39,6 +39,14 @@ io.on('connection', function (socket){
       };
     });
   });
+
+  // Listen for status requests
+  socket.on('get-status', function(){
+    // Get status and respond via socket
+    console.log('got status request');
+    var response = omx.getStatus();
+    socket.emit('status', response);
+  });
 });
 
 http.listen(3000, function(){
