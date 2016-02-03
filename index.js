@@ -10,7 +10,7 @@ const fs = require('fs');
 var omx = require('omxdirector').enableNativeLoop();
 
 // Set up the path to the delay video
-const delayVideoPath == __dirname + '/public/delay.mpeg'
+const delayVideoPath = __dirname + '/public/delay.mpeg'
 
 // Add all of our routes
 require('./routes.js')(app);
