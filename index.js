@@ -120,6 +120,9 @@ function sendStatus(omx, socket) {
     if (omx.response === undefined){
       response.loop = false;
     }
+    else {
+      response.loop = omx.response.loop;
+    };
     socket.emit('status', response);
 };
 
