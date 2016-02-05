@@ -17,6 +17,10 @@ require('./routes.js')(app);
 app.use('/filesystem', serveIndex('/', {'icons': true,
                               'template': 'public/filesystem-browser.html'}));
 
+var stopTimer = function() {
+  setTimeout(manualPlay, parseInt(omx.response.delay) * 1000, omx);
+};
+
 io.on('connection', function (socket){
   console.log('client connected');
 
@@ -80,9 +84,6 @@ io.on('connection', function (socket){
     };
   });
 
-  var stopTimer = function() {
-    setTimeout(manualPlay, parseInt(omx.response.delay) * 1000, omx);
-  };
 
   // Listen for stop requests
   socket.on('stop', function(){
