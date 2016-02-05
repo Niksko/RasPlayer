@@ -132,5 +132,5 @@ function manualPlay(omx) {
 };
 
 function stopTimer(omx){
-  setTimeout(manualPlay, parseInt(omx.response.delay) * 1000), omx);
+  setTimeout(manualPlay, parseInt(omx.response.delay) * 1000, omx);
 };
