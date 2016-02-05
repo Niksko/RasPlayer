@@ -54,6 +54,7 @@ io.on('connection', function (socket){
     // Play the video
     console.log(omx.nextVideo);
     console.log(omx.response.playlist[omx.nextVideo]);
+    console.log(omx.response.loop)
     omx.play(omx.response.playlist[omx.nextVideo], {audioOutput: omx.response.audioOutput});
     // Update the current video
     omx.nextVideo = omx.nextVideo + 1;
@@ -98,7 +99,6 @@ io.on('connection', function (socket){
       omx.play();
     };
   });
-
 
   // Listen for stop requests
   socket.on('stop', function(){
