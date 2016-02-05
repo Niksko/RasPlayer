@@ -50,25 +50,6 @@ io.on('connection', function (socket){
     setTimeout(manualPlay, parseInt(omx.response.delay) * 1000, omx);
   };
 
-  function manualPlay(omx) {
-    // Play the video
-    console.log(omx.nextVideo);
-    console.log(omx.response.playlist[omx.nextVideo]);
-    console.log(omx.response.loop)
-    omx.play(omx.response.playlist[omx.nextVideo], {audioOutput: omx.response.audioOutput});
-    // Update the current video
-    omx.nextVideo = omx.nextVideo + 1;
-    // If we're looping or we haven't reached the end of the list of videos
-    if (omx.nextVideo < omx.response.playlist.length || omx.response.loop){
-      // Add a listener for the omx stop
-      omx.once('stop', stopTimer);
-    };
-    // If we've gotten to the end of the list of videos and we need to loop, set the next video back to zero
-    if (omx.currentVideo >= omx.response.playlist.length && omx.response.loop){
-      omx.nextVideo = 0;
-    };
-  };
-
   // Listen for play requests
   socket.on('play', function(response){
     // Get the player status
@@ -144,4 +125,22 @@ function sendStatus(omx, socket) {
     socket.emit('status', response);
 };
 
-
+function manualPlay(omx) {
+  // Play the video
+  console.log(omx.nextVideo);
+  console.log(omx.response.playlist);
+  console.log(omx.response.playlist[omx.nextVideo]);
+  console.log(omx.response.loop)
+    omx.play(omx.response.playlist[omx.nextVideo], {audioOutput: omx.response.audioOutput});
+  // Update the current video
+  omx.nextVideo = omx.nextVideo + 1;
+  // If we're looping or we haven't reached the end of the list of videos
+  if (omx.nextVideo < omx.response.playlist.length || omx.response.loop){
+    // Add a listener for the omx stop
+    omx.once('stop', stopTimer);
+  };
+  // If we've gotten to the end of the list of videos and we need to loop, set the next video back to zero
+  if (omx.nextVideo >= omx.response.playlist.length && omx.response.loop){
+    omx.nextVideo = 0;
+  };
+};
