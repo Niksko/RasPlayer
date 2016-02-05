@@ -116,10 +116,7 @@ function sendStatus(omx, socket) {
     // Get status and respond via socket
     var response = omx.getStatus();
     // Correct the loop status depending on the internal omx loop status obtained from the frontend (if it exists)
-    if (omx.response !== undefined){
-      response.loop = omx.response.loop;
-    }
-    else {
+    if (omx.response === undefined){
       response.loop = false;
     }
     socket.emit('status', response);
@@ -130,8 +127,8 @@ function manualPlay(omx) {
   console.log(omx.nextVideo);
   console.log(omx.response.playlist);
   console.log(omx.response.playlist[omx.nextVideo]);
-  console.log(omx.response.loop)
-    omx.play(omx.response.playlist[omx.nextVideo], {audioOutput: omx.response.audioOutput});
+  console.log(omx.response.loop);
+  omx.play(omx.response.playlist[omx.nextVideo], {audioOutput: omx.response.audioOutput});
   // Update the current video
   omx.nextVideo = omx.nextVideo + 1;
   // If we're looping or we haven't reached the end of the list of videos
