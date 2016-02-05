@@ -126,5 +126,5 @@ function manualPlay(omx) {
     omx.currentVideo = 0;
   };
   // Add a listener for the omx stop
-  omx.once('stop', setTimeout(manualPlay(omx), parseInt(omx.response.delay) * 1000));
+  omx.once('stop', setTimeout(manualPlay, parseInt(omx.response.delay) * 1000), omx);
 };
