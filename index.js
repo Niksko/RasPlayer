@@ -126,12 +126,5 @@ function manualPlay(omx) {
     omx.currentVideo = 0;
   };
   // Add a listener for the omx stop
-  omx.once('stop', stopTimer(omx));
-}
-
-function stopTimer(omx){
-  // Use the delay for a timeout and just run the function again
-  setTimeout(function(){
-    manualPlay(omx);
-  }, parseInt(omx.response.delay) * 1000);
+  omx.once('stop', setTimeout(manualPlay(omx), parseInt(omx.response.delay) * 1000));
 };
