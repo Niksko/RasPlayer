@@ -22,3 +22,9 @@ Note: you may need to uninstall the legacy version of node with
 ```
 sudo apt-get remove nodejs-legacy
 ```
+
+Install dependencies with
+
+```
+sudo apt-get install feh imagemagick
+```
