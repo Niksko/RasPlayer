@@ -6,6 +6,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var serveIndex = require('serve-index');
 const fs = require('fs');
+const child_process = require('child_process');
 
 var omx = require('omxdirector').enableNativeLoop();
 
@@ -49,6 +50,11 @@ io.on('connection', function (socket){
   socket.on('play', function(response){
     // Get the player status
     var statusResponse = omx.getStatus();
+    // Create a background image with the correct color and size
+    var execString = 'convert -size 1920x1080 xc:' + response.bgcol + ' bg.png';
+    child_process.execSync(execString);
+    // Throw up this background image into a new feh process
+    socket.feh = child_process.spawn('feh', ['-F', 'x', '--hide-pointer', '-Z', 'bg.png']);
     // If either we're playing or we're stopped
     if (statusResponse.loaded === false || statusResponse.playing === true){
       // Set the video directory based on the folder from the response object
@@ -64,7 +70,10 @@ io.on('connection', function (socket){
 
   // Listen for stop requests
   socket.on('stop', function(){
+    // Stop omx
     omx.stop();
+    // Kill feh
+    socket.feh.kill();
   });
 
   // Listen for pause requests
