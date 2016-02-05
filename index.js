@@ -128,10 +128,6 @@ function sendStatus(omx, socket) {
 
 function manualPlay(omx) {
   // Play the video
-  console.log(omx.nextVideo);
-  console.log(omx.response.playlist);
-  console.log(omx.response.playlist[omx.nextVideo]);
-  console.log(omx.response.loop);
   omx.play(omx.response.playlist[omx.nextVideo], {audioOutput: omx.response.audioOutput});
   // Update the current video
   omx.nextVideo = omx.nextVideo + 1;
