@@ -61,7 +61,7 @@ io.on('connection', function (socket){
         playlist.push(response.folder + '/' + val);
       });
       // If the delay is not empty
-      if (response.delay !== ''){
+      if (response.delay !== '' && response.delay !== '0'){
         // We have to insert delays into the playlist
         // Get the amount of time requested
         delayTime = Math.ceil(parseInt(response.delay));
