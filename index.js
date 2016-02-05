@@ -65,17 +65,15 @@ io.on('connection', function (socket){
       omx.setVideoDir(response.folder);
       // Interpret the delay
       var delayTime = parseInt(response.delay);
-      if (isNaN(delayTime) || delayTime === 0){
-        // Start playing just with a regular playlist
-        omx.play(response.playlist, {loop: response.loop, audioOutput: response.audioOutput});
-      }
-      else {
-        // We need to manually trigger each video by attaching a stop listener, which then triggers a delay
-        // For this we need to add a response parameter and a currentVideo parameter
-        omx.response = response;
-        omx.currentVideo = 0;
-        // Manually play the videos using the delay
-        manualPlay(omx);
+      if (isNaN(delayTime)){
+        delayTime = 0;
+      };
+      // We need to manually trigger each video by attaching a stop listener, which then triggers a delay
+      // For this we need to add a response parameter and a currentVideo parameter
+      omx.response = response;
+      omx.currentVideo = 0;
+      // Manually play the videos using the delay
+      manualPlay(omx);
       }
     }
     // We're paused, so just unpause
