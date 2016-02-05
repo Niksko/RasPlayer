@@ -119,9 +119,9 @@ function sendStatus(omx, socket) {
     // Correct the loop status depending on the internal omx loop status obtained from the frontend (if it exists)
     if (omx.response !== undefined){
       response.loop = omx.response.loop;
-    };
+    }
     else {
-      (response.loop = false);
+      response.loop = false;
     }
     socket.emit('status', response);
 };
