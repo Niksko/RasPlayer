@@ -128,7 +128,7 @@ function manualPlay(omx) {
     // Add a listener for the omx stop
     omx.once('stop', stopTimer);
   };
-  if (omx.currentVideo <= omx.response.playlist.length && omx.response.loop){
+  if (omx.currentVideo > omx.response.playlist.length && omx.response.loop){
     omx.currentVideo = 0;
   };
 };
