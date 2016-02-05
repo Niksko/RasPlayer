@@ -122,7 +122,7 @@ function manualPlay(omx) {
   omx.play(omx.response.playlist[omx.currentVideo], {audioOutput: omx.response.audioOutput});
   // Update the current video
   omx.currentVideo = omx.currentVideo + 1;
-  if (omx.currentVideo > omx.response.playlist.length){
+  if (omx.currentVideo > omx.response.playlist.length && omx.response.loop){
     omx.currentVideo = 0;
   };
   // Add a listener for the omx stop
