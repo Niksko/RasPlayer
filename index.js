@@ -73,7 +73,7 @@ io.on('connection', function (socket){
     // Stop omx
     omx.stop();
     // Kill feh
-    socket.feh.kill('SIGQUIT');
+    socket.feh.kill('SIGHUP');
   });
 
   // Listen for pause requests
