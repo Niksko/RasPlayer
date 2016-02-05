@@ -80,6 +80,10 @@ io.on('connection', function (socket){
     };
   });
 
+  var stopTimer = function() {
+    setTimeout(manualPlay, parseInt(omx.response.delay) * 1000, omx);
+  };
+
   // Listen for stop requests
   socket.on('stop', function(){
     // Remove any other stop listeners that were added by the manual player
@@ -130,8 +134,3 @@ function manualPlay(omx) {
     omx.currentVideo = 0;
   };
 };
-
-var stopTimer = function(omx) {
-  setTimeout(manualPlay, parseInt(omx.response.delay) * 1000, omx);
-};
-
