@@ -61,7 +61,7 @@ io.on('connection', function (socket){
       omx.setVideoDir(response.folder);
       // Interpret the delay
       var delayTime = parseInt(response.delay);
-      if (delayTime === NaN || delayTime === 0){
+      if (isNaN(delayTime) || delayTime === 0){
         // Start playing just with a regular playlist
         omx.play(response.playlist, {loop: response.loop, audioOutput: response.audioOutput});
       }
