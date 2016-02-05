@@ -131,7 +131,5 @@ function manualPlay(omx) {
 
 function stopTimer(omx){
   // Use the delay for a timeout and just run the function again
-  setTimeout(function(){
-    manualPlay(omx);
-  }, parseInt(omx.response.delay) * 1000);
+  setTimeout(manualPlay(omx), parseInt(omx.response.delay) * 1000);
 };
