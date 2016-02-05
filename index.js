@@ -59,8 +59,20 @@ io.on('connection', function (socket){
     if (statusResponse.loaded === false || statusResponse.playing === true){
       // Set the video directory based on the folder from the response object
       omx.setVideoDir(response.folder);
-      // Start playing
-      omx.play(response.playlist, {loop: response.loop, audioOutput: response.audioOutput});
+      // Interpret the delay
+      var delayTime = parseInt(response.delay);
+      if (delayTime === NaN || delayTime === 0){
+        // Start playing just with a regular playlist
+        omx.play(response.playlist, {loop: response.loop, audioOutput: response.audioOutput});
+      }
+      else {
+        // We need to manually trigger each video by attaching a stop listener, which then triggers a delay
+        // For this we need to add a response parameter and a currentVideo parameter
+        omx.response = response;
+        omx.currentVideo = 0;
+        // Manually play the videos using the delay
+        manualPlay(omx);
+      }
     }
     // We're paused, so just unpause
     else {
@@ -70,6 +82,8 @@ io.on('connection', function (socket){
 
   // Listen for stop requests
   socket.on('stop', function(){
+    // Remove any other stop listeners that were added by the manual player
+    omx.removeListener('stop', stopTimer);
     // Stop omx
     omx.stop();
     // Kill feh
@@ -101,4 +115,23 @@ function sendStatus(omx, socket) {
     // Get status and respond via socket
     var response = omx.getStatus();
     socket.emit('status', response);
+};
+
+function manualPlay(omx) {
+  // Play the video
+  omx.play(omx.response.playlist[omx.currentVideo], {audioOutput: omx.response.audioOutput});
+  // Update the current video
+  omx.currentVideo = omx.currentVideo + 1;
+  if (omx.currentVideo > omx.response.playlist.length){
+    omx.currentVideo = 0;
+  };
+  // Add a listener for the omx stop
+  omx.once('stop', stopTimer(omx));
 }
+
+function stopTimer(omx){
+  // Use the delay for a timeout and just run the function again
+  setTimeout(function(){
+    manualPlay(omx);
+  }, parseInt(omx.response.delay) * 1000);
+};
