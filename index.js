@@ -116,6 +116,8 @@ http.listen(3000, function(){
 function sendStatus(omx, socket) {
     // Get status and respond via socket
     var response = omx.getStatus();
+    // Correct the loop status depending on the internal omx loop status obtained from the frontend
+    response.loop = omx.response.loop;
     socket.emit('status', response);
 };
 
