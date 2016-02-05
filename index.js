@@ -124,12 +124,14 @@ function manualPlay(omx) {
   omx.currentVideo = omx.currentVideo + 1;
   if (omx.currentVideo <= omx.response.playlist.length || omx.response.loop){
     // Add a listener for the omx stop
-    var stopTimer = function(omx) {
-      setTimeout(manualPlay, parseInt(omx.response.delay) * 1000, omx);
-    };
     omx.once('stop', stopTimer);
   };
   if (omx.currentVideo <= omx.response.playlist.length && omx.response.loop){
     omx.currentVideo = 0;
   };
 };
+
+var stopTimer = function(omx) {
+  setTimeout(manualPlay, parseInt(omx.response.delay) * 1000, omx);
+};
+
