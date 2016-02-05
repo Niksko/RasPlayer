@@ -74,7 +74,6 @@ io.on('connection', function (socket){
       omx.currentVideo = 0;
       // Manually play the videos using the delay
       manualPlay(omx);
-      }
     }
     // We're paused, so just unpause
     else {
