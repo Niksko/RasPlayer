@@ -69,9 +69,9 @@ io.on('connection', function (socket){
         delayTime = 0;
       };
       // We need to manually trigger each video by attaching a stop listener, which then triggers a delay
-      // For this we need to add a response parameter and a currentVideo parameter
+      // For this we need to add a response parameter and a nextVideo parameter
       omx.response = response;
-      omx.currentVideo = 0;
+      omx.nextVideo = 0;
       // Manually play the videos using the delay
       manualPlay(omx);
     }
@@ -123,14 +123,16 @@ function sendStatus(omx, socket) {
 
 function manualPlay(omx) {
   // Play the video
-  omx.play(omx.response.playlist[omx.currentVideo], {audioOutput: omx.response.audioOutput});
+  omx.play(omx.response.playlist[omx.nextVideo], {audioOutput: omx.response.audioOutput});
   // Update the current video
-  omx.currentVideo = omx.currentVideo + 1;
-  if (omx.currentVideo <= omx.response.playlist.length || omx.response.loop){
+  omx.nextVideo = omx.nextVideo + 1;
+  // If we're looping or we haven't reached the end of the list of videos
+  if (omx.nextVideo < omx.response.playlist.length || omx.response.loop){
     // Add a listener for the omx stop
     omx.once('stop', stopTimer);
   };
-  if (omx.currentVideo > omx.response.playlist.length && omx.response.loop){
-    omx.currentVideo = 0;
+  // If we've gotten to the end of the list of videos and we need to loop, set the next video back to zero
+  if (omx.currentVideo >= omx.response.playlist.length && omx.response.loop){
+    omx.nextVideo = 0;
   };
 };
