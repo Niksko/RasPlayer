@@ -59,7 +59,7 @@ io.on('connection', function (socket){
     var execString = 'convert -size 1920x1080 xc:' + response.bgcol + ' bg.png';
     child_process.execSync(execString);
     // Throw up this background image into a new feh process
-    socket.feh = child_process.spawn('feh', ['-F', 'x', '--hide-pointer', '-Z', 'bg.png']);
+    socket.feh = child_process.spawn('feh', ['-F', '-x', '--hide-pointer', '-Z', 'bg.png']);
     // If either we're playing or we're stopped
     if (statusResponse.loaded === false || statusResponse.playing === true){
       // Set the video directory based on the folder from the response object
