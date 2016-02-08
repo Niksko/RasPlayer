@@ -18,6 +18,7 @@
   ],
   "dependencies": {
     "jquery": "^2.2.0",
-    "jquery-ui": "^1.11.4"
+    "jquery-ui": "^1.11.4",
+    "Materialize": "materialize#^0.97.5"
   }
 }
