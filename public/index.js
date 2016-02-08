@@ -130,11 +130,9 @@ $(document).ready(function(){
     var audioSelect = $("#audio-select").val();
     // The amount of delay between videos
     var delay = $("#delay").val();
-    // The selected color
-    var bgcol = $("#colorpicker").val();
     // The current folder
     var folder = $("input#folder").val();
-    var returnObj = {playlist: playList, loop: loopStatus, folder: folder, audioOutput: audioSelect, delay: delay, bgcol: bgcol};
+    var returnObj = {playlist: playList, loop: loopStatus, folder: folder, audioOutput: audioSelect, delay: delay};
     socket.emit('play', returnObj);
   });
 
