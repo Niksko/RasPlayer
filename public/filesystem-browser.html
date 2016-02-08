@@ -4,26 +4,27 @@
         <title>directory listing for {directory}</title>
         <!-- JQuery -->
         <script src="/jquery.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript" src="/materialize.min.js"></script>
         <script src="/public/filesystem-browser.js"></script>
-        <link rel="stylesheet" type="text/css" href="/public/filesystem-browser.css">
         <!--Import Google Icon Font-->
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="/materialize.min.css"  media="screen,projection"/>
 
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <div id="folder-select">
-            <div id="header">
-                <h1><a href="/">~</a>{linked-path}</h1>
+        <nav>
+            <div class="nav-wrapper teal white-text">
+                <div class="breadcrumbs">
+                    <a href="/">~</a>{linked-path}
+                </div>
+                <a class="select orange waves-effect waves-light btn">Select this folder</a>
             </div>
-            <button class="select">Select this folder</button>
-            <div id="file-list">
-                {files}
-            </div>
+        </nav>
+        <div id="file-list">
+            {files}
         </div>
     </body>
 </html>
