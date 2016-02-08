@@ -40,4 +40,14 @@ module.exports = function(app) {
     res.sendFile(__dirname + '/bower_components/jquery-ui/jquery-ui.min.js');
   });
 
+  // Set up a route for materialize.js
+  app.get('/materialize.min.js', function(req, res){
+    res.sendFile(__dirname + '/bower_components/Materialize/dist/js/materialize.min.js');
+  });
+
+  // Set up a route for materialize.js
+  app.get('/materialize.min.css', function(req, res){
+    res.sendFile(__dirname + '/bower_components/Materialize/dist/css/materialize.min.css');
+  });
+
 };
