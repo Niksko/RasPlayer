@@ -49,7 +49,6 @@ io.on('connection', function (socket){
     sendStatus(omx, socket);
   });
 
-
   // Listen for play requests
   socket.on('play', function(response){
     // Get the player status
@@ -57,7 +56,7 @@ io.on('connection', function (socket){
     // If either we're playing or we're stopped
     if (statusResponse.loaded === false || statusResponse.playing === true){
       // Set the video directory based on the folder from the response object
-      omx.setVideoDir(response.folder);
+      omx.setVideosDirectory(response.folder);
       // Interpret the delay
       var delayTime = parseInt(response.delay);
       if (isNaN(delayTime)){
