@@ -10,9 +10,6 @@ const child_process = require('child_process');
 
 var omx = require('omx-manager');
 
-// Set up the path to the delay video
-const delayVideoPath = __dirname + '/public/delay.mpeg'
-
 // Add all of our routes
 require('./routes.js')(app);
 
