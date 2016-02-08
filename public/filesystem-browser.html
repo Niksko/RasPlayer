@@ -6,12 +6,17 @@
         <script src="/jquery.js"></script>
         <script src="/public/filesystem-browser.js"></script>
         <link rel="stylesheet" type="text/css" href="/public/filesystem-browser.css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     </head>
     <body>
         <div id="folder-select">
-            <h1><a href="/">~</a>{linked-path}</h1>
+            <div id="header">
+                <h1><a href="/">~</a>{linked-path}</h1>
+            </div>
             <button class="select">Select this folder</button>
-            {files}
+            <div id="file-list">
+                {files}
+            </div>
         </div>
     </body>
 </html>
