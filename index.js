@@ -8,7 +8,7 @@ var serveIndex = require('serve-index');
 const fs = require('fs');
 const child_process = require('child_process');
 
-var omx = require('omxdirector').enableNativeLoop();
+var omx = require('omx-manager');
 
 // Add all of our routes
 require('./routes.js')(app);
