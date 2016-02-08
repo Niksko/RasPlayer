@@ -6,8 +6,9 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var serveIndex = require('serve-index');
 const fs = require('fs');
+const child_process = require('child_process');
 
-var omx = require('omxdirector').enableNativeLoop();
+var omx = require('omx-manager');
 
 // Set up the path to the delay video
 const delayVideoPath = __dirname + '/public/delay.mpeg'
@@ -18,6 +19,10 @@ require('./routes.js')(app);
 // Serve folders from the file structure using serveIndex
 app.use('/filesystem', serveIndex('/', {'icons': true,
                               'template': 'public/filesystem-browser.html'}));
+
+var stopTimer = function() {
+  setTimeout(manualPlay, parseInt(omx.response.delay) * 1000, omx);
+};
 
 io.on('connection', function (socket){
   console.log('client connected');
@@ -48,37 +53,31 @@ io.on('connection', function (socket){
     sendStatus(omx, socket);
   });
 
+
   // Listen for play requests
   socket.on('play', function(response){
     // Get the player status
     var statusResponse = omx.getStatus();
+    // Create a background image with the correct color and size
+    var execString = 'convert -size 1920x1080 xc:' + response.bgcol + ' bg.png';
+    child_process.execSync(execString);
+    // Throw up this background image into a new feh process
+    socket.feh = child_process.spawn('feh', ['-F', '-x', '--hide-pointer', '-Z', 'bg.png']);
     // If either we're playing or we're stopped
     if (statusResponse.loaded === false || statusResponse.playing === true){
-      // Create a new array to store the playlist
-      var playlist = [];
-      // Join all of the filenames with the chosen directory and put them on the playlist
-      response.playlist.forEach(function(val){
-        playlist.push(response.folder + '/' + val);
-      });
-      // If the delay is not empty
-      if (response.delay !== '' && response.delay !== '0'){
-        // We have to insert delays into the playlist
-        // Get the amount of time requested
-        delayTime = Math.ceil(parseInt(response.delay));
-        // Create a new array to store the playlist with inserted blank videos
-        var playlistWithDelays = [];
-        playlist.forEach(function(value){
-          // For each element in the playlist, push the correct number of delay videos onto the playlist
-          playlistWithDelays.push(value);
-          for (var i = 0; i < delayTime; i++){
-            playlistWithDelays.push(delayVideoPath);
-          };
-        });
-        // Finally swap the new playlist for the old one
-        playlist = playlistWithDelays;
+      // Set the video directory based on the folder from the response object
+      omx.setVideoDir(response.folder);
+      // Interpret the delay
+      var delayTime = parseInt(response.delay);
+      if (isNaN(delayTime)){
+        delayTime = 0;
       };
-      // Start playing
-      omx.play(playlist, {loop: response.loop, audioOutput: response.audioOutput, letterbox: true});
+      // We need to manually trigger each video by attaching a stop listener, which then triggers a delay
+      // For this we need to add a response parameter and a nextVideo parameter
+      omx.response = response;
+      omx.nextVideo = 0;
+      // Manually play the videos using the delay
+      manualPlay(omx);
     }
     // We're paused, so just unpause
     else {
@@ -88,7 +87,12 @@ io.on('connection', function (socket){
 
   // Listen for stop requests
   socket.on('stop', function(){
+    // Remove any other stop listeners that were added by the manual player
+    omx.removeListener('stop', stopTimer);
+    // Stop omx
     omx.stop();
+    // Kill feh
+    socket.feh.kill('SIGHUP');
   });
 
   // Listen for pause requests
@@ -115,5 +119,25 @@ http.listen(3000, function(){
 function sendStatus(omx, socket) {
     // Get status and respond via socket
     var response = omx.getStatus();
+    // Correct the loop status depending on the internal omx loop status obtained from the frontend (if it exists)
+    if (omx.response !== undefined && response.settings !== undefined){
+      response.settings.loop = omx.response.loop;
+    };
     socket.emit('status', response);
-}
+};
+
+function manualPlay(omx) {
+  // Play the video
+  omx.play(omx.response.playlist[omx.nextVideo], {audioOutput: omx.response.audioOutput});
+  // Update the current video
+  omx.nextVideo = omx.nextVideo + 1;
+  // If we're looping or we haven't reached the end of the list of videos
+  if (omx.nextVideo < omx.response.playlist.length || omx.response.loop){
+    // Add a listener for the omx stop
+    omx.once('stop', stopTimer);
+  };
+  // If we've gotten to the end of the list of videos and we need to loop, set the next video back to zero
+  if (omx.nextVideo >= omx.response.playlist.length && omx.response.loop){
+    omx.nextVideo = 0;
+  };
+};

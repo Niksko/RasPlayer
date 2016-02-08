@@ -52,7 +52,6 @@ $(document).ready(function(){
       $("button#play").removeAttr('disabled');
       $("button#stop").removeAttr('disabled');
       $("button#pause").attr('disabled', 'disabled');
-
     };
   });
 
@@ -124,12 +123,18 @@ $(document).ready(function(){
         playList.push($(li).text());
       };
     });
-    // Finally, push the list to the backend, along with the loop status, audio option and delay time
+    // Finally, push the list to the backend, along with the associated options
+    // Whether to loop
     var loopStatus = $("#loop-checkbox").is(':checked');
+    // Which audio device to output to
     var audioSelect = $("#audio-select").val();
-    var delayTime = $("#delay").val();
+    // The amount of delay between videos
+    var delay = $("#delay").val();
+    // The selected color
+    var bgcol = $("#colorpicker").val();
+    // The current folder
     var folder = $("input#folder").val();
-    var returnObj = {playlist: playList, loop: loopStatus, folder: folder, audioOutput: audioSelect, delay: delayTime};
+    var returnObj = {playlist: playList, loop: loopStatus, folder: folder, audioOutput: audioSelect, delay: delay, bgcol: bgcol};
     socket.emit('play', returnObj);
   });
 
