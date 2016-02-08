@@ -125,7 +125,7 @@ function sendStatus(omx, socket) {
 
 function manualPlay(omx) {
   // Play the video
-  omx.play(omx.response.playlist[omx.nextVideo], {audioOutput: omx.response.audioOutput});
+  omx.play(omx.response.playlist[omx.nextVideo], {'-o': omx.response.audioOutput, '--display': 5});
   // Update the current video
   omx.nextVideo = omx.nextVideo + 1;
   // If we're looping or we haven't reached the end of the list of videos
