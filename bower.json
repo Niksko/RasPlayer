@@ -18,10 +18,6 @@
   ],
   "dependencies": {
     "jquery": "^2.2.0",
-    "jquery-ui": "^1.11.4",
-    "bourbon": "~4.2.6",
-    "neat": "^1.7.2",
-    "bitters": "^1.2.0",
-    "refills": "^0.1.0"
+    "jquery-ui": "^1.11.4"
   }
 }
