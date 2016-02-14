@@ -3,37 +3,39 @@
     <head>
         <title>RasPlayer</title>
         <script src="/jquery.js"></script>
-        <script type="text/javascript" src="/materialize.min.js"></script>
         <script src="/jquery-ui.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script src="/public/index.js"></script>
         <link rel="stylesheet" type="text/css" href="/public/index.css">
+        <!-- Pure CSS stylesheet -->
+        <link rel="stylesheet" href="/pure-min.css">
         <!--Import Google Icon Font-->
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
         <header>
           <h1>RasPlayer</h1>
+          <form class="pure-form">
+            <input id="folder" type="text"></input>
+          </form>
+          <button id="folder-select" class="pure-button">Choose folder</button>
+          <button id="file-list" class="pure-button">Get file list</button>
         </header>
-        <input id="folder" type="text"></input>
-        <button id="folder-select">Choose folder</button>
-        <button id="file-list">Get file list</button>
-        <div id="file-list">
+        <div class="pure-g">
+        <div id="file-list" class="pure-u-3-8">
             <ul id=sortable>
             </ul>
         </div>
-        <div id='now-playing'>
-            <ul>
-                <li>None!</li>
-            </ul>
-        </div>
-        <div id="controls">
-            <button id="play" disabled>Play</button>
-            <button id="pause" disabled>Pause</button>
-            <button id="stop" disabled>Stop</button>
+        <div id="controls" class="pure-u-1-4">
+            <span>
+            <button id="play" class="pure-button" disabled>Play</button>
+            <button id="pause" class="pure-button" disabled>Pause</button>
+            <button id="stop" class="pure-button" disabled>Stop</button>
+            </span>
             <span id="loop-span">
                 Loop?
-                <input id="loop-checkbox" type="checkbox" name="loop"/>
+                <input id="loop-checkbox" class="pure-checkbox" type="checkbox" name="loop"/>
             </span>
             <span id="audio-span">
                 Audio output
@@ -43,9 +45,18 @@
                 </select>
             </span>
             <span>
+              <form class="pure-form">
                 Delay between videos (s)
                 <input id="delay" type="text"></input>
+                </form>
             </span>
         </div>
+ 
+        <div id='now-playing' class="pure-u-3-8">
+            <ul>
+                <li>None!</li>
+            </ul>
+        </div>
+       </div>
     </body>
 </html>

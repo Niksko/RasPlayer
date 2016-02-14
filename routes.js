@@ -40,4 +40,9 @@ module.exports = function(app) {
     res.sendFile(__dirname + '/bower_components/jquery-ui/jquery-ui.min.js');
   });
 
+  // Set up a route for pure
+  app.get('/pure-min.css', function(req, res){
+    res.sendFile(__dirname + '/bower_components/pure/pure-min.css');
+  });
+
 };

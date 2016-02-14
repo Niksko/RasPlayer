@@ -1,0 +1,44 @@
+@import "palette";
+
+.pure-button {
+    background-color: $accent-color;
+}
+
+
+header {
+    background-color: $primary-dark;
+    color: #FFF;
+    padding: 0.5em 1em;
+
+    button {
+        display: inline;
+    }
+
+    form {
+        display: inline;
+    }
+
+    .pure-button {
+        background-color: $accent-color;
+    }
+}
+
+.pure-g > div {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, .38);
+    padding: 0.5em 1em;
+
+}
+
+div#controls {
+    span {
+        display: block;
+        padding: 0.5em;
+
+        .pure-button {
+            background-color: $accent-color;
+        }
+    }
+}
