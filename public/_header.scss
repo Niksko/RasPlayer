@@ -1,0 +1,17 @@
+header {
+    background-color: $primary-dark;
+    color: #FFF;
+    padding: 0.5em 1em;
+
+    button {
+        display: inline;
+    }
+
+    form {
+        display: inline;
+    }
+
+    .pure-button {
+        background-color: $accent-color;
+    }
+}

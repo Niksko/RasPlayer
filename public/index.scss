@@ -1,4 +1,5 @@
 @import "palette";
+@import "header";
 
 html, button, input, select, textarea,
 .pure-g [class *= "pure-u"] {
@@ -34,24 +35,6 @@ ul#sortable {
         display: inline;
         vertical-align: middle;
         margin-right: 0.5em;
-    }
-}
-
-header {
-    background-color: $primary-dark;
-    color: #FFF;
-    padding: 0.5em 1em;
-
-    button {
-        display: inline;
-    }
-
-    form {
-        display: inline;
-    }
-
-    .pure-button {
-        background-color: $accent-color;
     }
 }
 
