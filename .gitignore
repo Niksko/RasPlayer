@@ -37,3 +37,6 @@ bower_components
 
 # vim swapfiles
 *.swp
+
+# css files, since these should be compiled from scss source
+*.css
