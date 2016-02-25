@@ -17,6 +17,12 @@ form {
     @include primary-text-color-dark;
 }
 
+div#file-list {
+    p {
+        @include disabled-text-color-dark;
+    }
+}
+
 ul#sortable {
     .ui-state-disabled {
         @include disabled-text-color-dark;
