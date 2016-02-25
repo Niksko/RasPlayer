@@ -1,0 +1,51 @@
+@import "palette";
+@import "header";
+
+html, button, input, select, textarea,
+.pure-g [class *= "pure-u"] {
+    font-family: 'Roboto', sans-serif;
+}
+
+.pure-button {
+    background-color: $accent-color;
+    margin: 1em;
+}
+
+header {
+    a {
+        text-decoration: none;
+        color: #FFF;
+    }
+}
+
+body {
+    @include primary-text-color-dark;
+
+    header {
+        div#breadcrumbs {
+            padding: 1em;
+        }
+    }
+
+    div#file-list {
+        width: 95%;
+        li {
+            list-style-type: none;
+            padding-top: 0.25em;
+            padding-bottom: 0.25em;
+            padding-left: 0.25em;
+            padding-right: 100%;
+            border: 1px solid;
+            a {
+                text-decoration: none;
+                @include primary-text-color-dark;
+                span {
+                    margin: 1em;
+                }
+                .size,.date {
+                    display: none;
+                }
+            }
+        }
+    }
+}

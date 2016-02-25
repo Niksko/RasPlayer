@@ -4,23 +4,27 @@
         <title>directory listing for {directory}</title>
         <!-- JQuery -->
         <script src="/jquery.js"></script>
-        <script type="text/javascript" src="/materialize.min.js"></script>
         <script src="/public/filesystem-browser.js"></script>
+        <!-- Pure CSS stylesheet -->
+        <link rel="stylesheet" href="/pure-min.css">
         <link type="text/css" rel="stylesheet" href="/public/filesystem-browser.css"/>
         <!--Import Google Icon Font-->
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Import Roboto font -->
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+ 
     </head>
     <body>
-        <nav>
-            <div class="nav-wrapper teal white-text">
-                <div class="breadcrumbs">
-                    <a href="/">~</a>{linked-path}
-                </div>
-                <a class="select orange waves-effect waves-light btn">Select this folder</a>
-            </div>
-        </nav>
+        <header>
+          <h1>RasPlayer</h1>
+          <h2>Browsing filesystem</h2>
+          <div id="breadcrumbs">
+            <strong><a href="/">~</a>{linked-path}</strong>
+          </div>
+        </header>
+        <button id="select" class="pure-button">Select this folder</button>
         <div id="file-list">
-            {files}
+          {files}
         </div>
     </body>
 </html>
