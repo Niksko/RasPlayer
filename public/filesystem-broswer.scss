@@ -28,14 +28,11 @@ body {
     }
 
     div#file-list {
-        width: 95%;
+        width: 100%;
         li {
             list-style-type: none;
-            padding-top: 0.25em;
-            padding-bottom: 0.25em;
-            padding-left: 0.25em;
-            padding-right: 100%;
-            border: 1px solid;
+            padding: 0.3em;
+            border: 1px solid rgba(0, 0, 0, .38);
             a {
                 text-decoration: none;
                 @include primary-text-color-dark;
