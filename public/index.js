@@ -39,11 +39,11 @@ $(document).ready(function(){
       // Get the list of videos and populate the 'now playing' list
       //
       // First, empty the list
-      $("div#now-playing ul").empty();
+      $("div#now-playing ol").empty();
       // Now add a li for each of the videos currently playing
       for (var i=0; i < response.videos.length; i++){
         var $listItem = $("<li>").text(response.videos[i]);
-        $("div#now-playing ul").append($listItem);
+        $("div#now-playing ol").append($listItem);
       }
     }
     else {
