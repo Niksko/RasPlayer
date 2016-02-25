@@ -9,3 +9,13 @@ $accent-color: #FFD740;
     color: #000; // Fallback for browsers not supporting opacity
     color: rgba(0, 0, 0, .87);
 }
+
+@mixin secondary-text-color-dark {
+    color: #000; // Fallback for browsers not supporting opacity
+    color: rgba(0, 0, 0, .54);
+}
+
+@mixin disabled-text-color-dark {
+    color: #000; // Fallback for browsers not supporting opacity
+    color: rgba(0, 0, 0, .38);
+}

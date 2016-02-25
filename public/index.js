@@ -86,8 +86,11 @@ $(document).ready(function(){
       $("div#file-list ul").empty();
       // Create the required li entries for files in the list
       for (var i=0; i < fileArray.length; i++) {
-        var $listItem = "<li class='ui-state-default'>" + fileArray[i]+ "</li>"
         var $listItem = $("<li>", {class: 'ui-state-default'}).text(fileArray[i]);
+        // Create an icon element
+        var $icon = $("<i>", {class: 'material-icons'}).text('reorder');
+        // Add an icon inside to signify that they can be reordered
+        $listItem.prepend($icon);
         $("div#file-list ul").append($listItem);
       };
 
