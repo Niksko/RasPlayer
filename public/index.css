@@ -1,5 +1,17 @@
+html, button, input, select, textarea,
+.pure-g [class*="pure-u"] {
+  font-family: 'Roboto', sans-serif; }
+
 .pure-button {
   background-color: #FFD740; }
+
+body {
+  color: #000;
+  color: rgba(0, 0, 0, 0.87); }
+
+form {
+  color: #000;
+  color: rgba(0, 0, 0, 0.87); }
 
 header {
   background-color: #303F9F;

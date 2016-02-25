@@ -1,4 +1,11 @@
+// These are the colors used in our color scheme
 $primary-color: #3F51B5;
 $primary-dark: #303F9F;
 $primary-light: #7986CB;
 $accent-color: #FFD740;
+
+// These are text colors and stylings
+@mixin primary-text-color-dark {
+    color: #000; // Fallback for browsers not supporting opacity
+    color: rgba(0, 0, 0, .87);
+}
