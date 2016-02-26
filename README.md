@@ -7,7 +7,7 @@ A nodejs application for queueing and playing video on a touchscreen Raspberry P
 Clone this repository to a local directory with:
 
 ```
-git clone http://www.github.com/Niksko/RasPlayer.git
+git clone https://www.github.com/Niksko/RasPlayer.git
 ```
 
 Fetch and install the latest version of node.
