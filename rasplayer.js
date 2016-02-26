@@ -84,8 +84,9 @@ io.on('connection', function (socket){
   });
 
   socket.on('shutdown', function(){
-    // Exit the node instance after two seconds, just to allow time to serve the shutdown page
+    // Stop the omxplayer and exit the node instance after two seconds, just to allow time to serve the shutdown page
     setTimeout(function (){
+      omx.stop();
       process.exit();
     }, 2000);
   });
