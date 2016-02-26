@@ -9,68 +9,70 @@
         <!-- Pure CSS stylesheet -->
         <link rel="stylesheet" href="/pure-min.css">
         <!--[if lte IE 8]>
-          <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
+            <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
         <![endif]-->
         <!--[if gt IE 8]><!-->
-          <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
-        <!--<![endif]-->
-        <!-- Import our stylesheet -->
-        <link rel="stylesheet" type="text/css" href="/public/index.css">
-          <!-- Import Roboto font -->
-        <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
-        <!--Import Google Icon Font-->
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+            <!--<![endif]-->
+            <!-- Import our stylesheet -->
+            <link rel="stylesheet" type="text/css" href="/public/index.css">
+            <!-- Import Roboto font -->
+            <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+            <!--Import Google Icon Font-->
+            <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
         <header>
-          <h1>RasPlayer</h1>
-          <form class="pure-form">
-            <input id="folder" type="text"></input>
-          </form>
-          <button id="folder-select" class="pure-button">Choose folder</button>
-          <button id="file-list" class="pure-button">Get file list</button>
-          <button id="shutdown" class="pure-button">Shutdown</button>
+            <h1>RasPlayer</h1>
+            <form class="pure-form">
+                <input id="folder" type="text"></input>
+            </form>
+            <button id="folder-select" class="pure-button">Choose folder</button>
+            <button id="file-list" class="pure-button">Get file list</button>
+            <button id="shutdown" class="pure-button">Shutdown</button>
         </header>
         <div class="pure-g">
-        <div id="file-list" class="pure-u-1 pure-u-sm-3-8">
-          <h2>File List</h2>
-          <p><em>Drag to change the play order of videos. Click to prevent videos from being played. Click again to re-enable.</em></p>
-            <ul id=sortable>
-            </ul>
-        </div>
-        <div id="controls" class="pure-u-1 pure-u-sm-1-4">
-          <h2>Controls</h2>
-            <span>
-            <button id="play" class="pure-button" disabled>Play</button>
-            <button id="pause" class="pure-button" disabled>Pause</button>
-            <button id="stop" class="pure-button" disabled>Stop</button>
-            </span>
-            <span id="loop-span">
-                Loop?
-                <input id="loop-checkbox" class="pure-checkbox" type="checkbox" name="loop"/>
-            </span>
-            <span id="audio-span">
-                Audio output
-                <select id="audio-select">
-                    <option value="local">Local</option>
-                    <option value="hdmi">HDMI</option>
-                </select>
-            </span>
-            <span>
-              <form class="pure-form">
-                Delay between videos (s)
-                <input id="delay" type="text"></input>
-                </form>
-            </span>
-        </div>
+            <div id='now-playing' class="pure-u-1 pure-u-sm-3-8">
+                <h2>Now Playing</h2>
+                <ol>
+                    <li>None!</li>
+                </ol>
+            </div>
+
+           <div id="controls" class="pure-u-1 pure-u-sm-1-4">
+                <h2>Controls</h2>
+                <span>
+                    <button id="play" class="pure-button" disabled>Play</button>
+                    <button id="pause" class="pure-button" disabled>Pause</button>
+                    <button id="stop" class="pure-button" disabled>Stop</button>
+                </span>
+                <span id="loop-span">
+                    Loop?
+                    <input id="loop-checkbox" class="pure-checkbox" type="checkbox" name="loop"/>
+                </span>
+                <span id="audio-span">
+                    Audio output
+                    <select id="audio-select">
+                        <option value="local">Local</option>
+                        <option value="hdmi">HDMI</option>
+                    </select>
+                </span>
+                <span>
+                    <form class="pure-form">
+                        Delay between videos (s)
+                        <input id="delay" type="text"></input>
+                    </form>
+                </span>
+            </div>
+
+            <div id="file-list" class="pure-u-1 pure-u-sm-3-8">
+                <h2>File List</h2>
+                <p><em>Drag to change the play order of videos. Click to prevent videos from being played. Click again to re-enable.</em></p>
+                <ul id=sortable>
+                </ul>
+            </div>
  
-        <div id='now-playing' class="pure-u-1 pure-u-sm-3-8">
-          <h2>Now Playing</h2>
-            <ol>
-                <li>None!</li>
-            </ol>
         </div>
-       </div>
     </body>
 </html>
