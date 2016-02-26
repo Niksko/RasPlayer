@@ -29,7 +29,7 @@ $(document).ready(function(){
       $("button#stop").removeAttr('disabled');
 
       // Ensure the loop checkbox reflects the current state
-      if (response.settings.loop === true){
+      if (response.loop === true){
         $("#loop-checkbox").prop('checked', true);
       }
       else {
