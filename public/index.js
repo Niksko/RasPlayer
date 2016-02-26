@@ -123,7 +123,7 @@ $(document).ready(function(){
       // If the item is not disabled
       if($(li).hasClass('ui-state-disabled') === false){
         // Push it onto the list
-        playList.push($(li).text());
+        playList.push($(li).text().substring(7));
       };
     });
     // Finally, push the list to the backend, along with the associated options
