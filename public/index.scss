@@ -10,6 +10,13 @@ html, button, input, select, textarea,
     background-color: $accent-color;
 }
 
+header {
+    #shutdown {
+        background-color: #F00;
+        float: right;
+    }
+}
+
 body {
     @include primary-text-color-dark;
 }

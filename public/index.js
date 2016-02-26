@@ -149,4 +149,9 @@ $(document).ready(function(){
     socket.emit('stop');
   });
 
+  // Add a handler for the shutdown button
+  $("button#shutdown").click(function(){
+    socket.emit('shutdown');
+  });
+
 });
