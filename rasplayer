@@ -1,4 +1,4 @@
 #!/bin/sh
 
-node /usr/share/RasPlayer/rasplayer.js &
-epiphany localhost:3000 &
+node /usr/share/RasPlayer/rasplayer.js
+epiphany localhost:3000 > /dev/null 2>&1 &
