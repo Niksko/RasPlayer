@@ -83,6 +83,11 @@ io.on('connection', function (socket){
     omx.stop();
   });
 
+  socket.on('shutdown', function(){
+    // Exit the node instance
+    process.exit();
+  });
+
   // Listen for pause requests
   socket.on('pause', function(){
     omx.pause();
