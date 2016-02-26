@@ -4,4 +4,4 @@ Encoding=UTF-8
 Name=RasPlayer
 Comment=Node based video player
 Exec=/usr/bin/rasplayer
-Terminal=true
+Terminal=false
