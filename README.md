@@ -29,8 +29,9 @@ Install some dependencies.
 sudo apt-get install npm
 ```
 
-Make and install the required files.
+Change to the directory and make and install the required files.
 
 ```
+cd RasPlayer
 make && sudo make install
 ```

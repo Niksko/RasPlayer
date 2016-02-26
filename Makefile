@@ -25,7 +25,7 @@ build:
 install:
 	@echo "$(ccyellow)Installing to /usr/share$(ccend)"
 	mkdir /usr/share/RasPlayer
-	cp ./* /usr/share/RasPlayer
+	cp -r ./* /usr/share/RasPlayer
 	cp /usr/share/RasPlayer/rasplayer /usr/bin
 	@echo "$(ccyellow)Creating desktop shortcut$(ccend)"
 	cp /usr/share/RasPlayer/rasplayer.desktop /home/pi/Desktop/
