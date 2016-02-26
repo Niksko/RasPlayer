@@ -84,8 +84,10 @@ io.on('connection', function (socket){
   });
 
   socket.on('shutdown', function(){
-    // Exit the node instance
-    process.exit();
+    // Exit the node instance after two seconds, just to allow time to serve the shutdown page
+    setTimeout(function (){
+      process.exit();
+    }, 2000);
   });
 
   // Listen for pause requests

@@ -45,4 +45,16 @@ module.exports = function(app) {
     res.sendFile(__dirname + '/bower_components/pure/pure-min.css');
   });
 
+  // Set up a route for the shutdown page
+  app.get('/public/shutdown.html', function(req, res){
+    res.sendFile(__dirname + '/public/shutdown.html');
+  });
+
+  // Set up a route for the shutdown page
+  app.get('/public/shutdown.css', function(req, res){
+    res.sendFile(__dirname + '/public/shutdown.css');
+  });
+
+
+
 };

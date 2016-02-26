@@ -151,6 +151,7 @@ $(document).ready(function(){
 
   // Add a handler for the shutdown button
   $("button#shutdown").click(function(){
+    window.location.replace('/public/shutdown.html')
     socket.emit('shutdown');
   });
 
