@@ -19,8 +19,7 @@ build:
 	@echo "$(ccyellow)Install bower dependencies$(ccend)"
 	bower install
 	@echo "$(ccyellow)Compile sass into css$(ccend)"
-	node_modules/node-sass/bin/node-sass public/index.scss index.css
-	node_modules/node-sass/bin/node-sass public/filesystem-browser.scss filesystem-browser.css
+	node_modules/node-sass/bin/node-sass public -o public
 	@echo "$(ccgreen)Build completed successfully$(ccend)"
 
 install:
