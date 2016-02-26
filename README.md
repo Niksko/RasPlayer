@@ -29,3 +29,8 @@ Change to the directory and make and install the required files.
 cd RasPlayer
 make && sudo make install
 ```
+
+Be patient, as this will take a while.
+
+There should now be a desktop icon called RasPlayer. Click this to launch a RasPlayer instance and to open the web
+interface.

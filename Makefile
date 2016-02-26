@@ -14,10 +14,8 @@ build:
 	@echo "$(ccyellow)Main install tasks."
 	@echo "Install npm dependencies$(ccend)"
 	npm install
-	@echo "$(ccyellow)Install bower$(ccend)"
-	npm install bower
 	@echo "$(ccyellow)Install bower dependencies$(ccend)"
-	bower install
+	node_modules/bower/bin/bower install
 	@echo "$(ccyellow)Compile sass into css$(ccend)"
 	node_modules/node-sass/bin/node-sass public -o public
 	@echo "$(ccgreen)Build completed successfully$(ccend)"
