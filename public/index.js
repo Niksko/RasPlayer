@@ -74,7 +74,7 @@ $(document).ready(function(){
   $("input#folder").val(folder);
 
   // Click the get files button
-  $("button#file-list").trigger('click');
+  $("button#file-list").click();
 
   // Add a handler for the button which requests the folder list
   $("button#file-list").click(function(){
