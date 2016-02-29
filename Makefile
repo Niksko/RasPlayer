@@ -22,6 +22,7 @@ build:
 
 install:
 	@echo "$(ccyellow)Installing to /usr/share$(ccend)"
+	rm -rf /usr/share/RasPlayer
 	mkdir /usr/share/RasPlayer
 	cp -r ./* /usr/share/RasPlayer
 	cp /usr/share/RasPlayer/rasplayer /usr/bin
