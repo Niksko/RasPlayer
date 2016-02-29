@@ -93,6 +93,8 @@ $(document).ready(function(){
       };
     });
     // Finally, push the list to the backend, along with the associated options
+    // Whether to resume
+    var resume = $('#resume-checkbox').is(':checked');
     // Whether to loop
     var loopStatus = $("#loop-checkbox").is(':checked');
     // Which audio device to output to
@@ -101,7 +103,14 @@ $(document).ready(function(){
     var delay = $("#delay").val();
     // The current folder
     var folder = $("input#folder").val();
-    var returnObj = {playlist: playlist, loop: loopStatus, folder: folder, audioOutput: audioSelect, delay: delay};
+    var returnObj = {
+                      playlist: playlist,
+                      loop: loopStatus,
+                      folder: folder,
+                      audioOutput: audioSelect,
+                      delay: delay,
+                      resume: resume
+                    };
     socket.emit('play', returnObj);
   });
 

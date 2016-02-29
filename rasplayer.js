@@ -54,10 +54,23 @@ io.on('connection', function (socket){
 
   // Listen for play requests
   socket.on('play', function(frontendResponse){
-    // Get the player status
+   // Get the player status
     var statusResponse = omx.getStatus();
     // If either we're playing or we're stopped
     if (statusResponse.loaded === false || statusResponse.playing === true){
+      // Check the frontend response for the resume bit, and replace the frontendResponse with the saved one 
+      // if it's present
+      if (frontendResponse.resume === true) {
+        fs.readFileSync('/home/niksko/.rasplayer.resume', (err, data) => {
+          frontendResponse = JSON.parse(data);
+        });
+      }
+      // If it's not
+      else {
+        // Write the frontendResponse to a file for later resuming
+        var frontendString = JSON.stringify(frontendResponse);
+        fs.writeFileSync('/home/niksko/.rasplyer.resume', frontendString);
+      };
       // Set the video directory based on the folder from the response object
       omx.setVideosDirectory(frontendResponse.folder);
       // Interpret the delay
@@ -127,7 +140,7 @@ function manualPlay(omx) {
   // Update the current video
   omx.nextVideo = omx.nextVideo + 1;
   // If we're looping or we haven't reached the end of the list of videos
-  if (omx.nextVideo < omx.frontendVariablesplaylist.length || omx.frontendVariables.loop){
+  if (omx.nextVideo < omx.frontendVariables.playlist.length || omx.frontendVariables.loop){
     // Add a listener for the omx stop
     omx.once('stop', stopTimer);
   };
