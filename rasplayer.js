@@ -25,23 +25,26 @@ io.on('connection', function (socket){
 
   // Listen for file grab messages
   socket.on('get-files', function(folder){
-    // Fetch the file list
-    var fileList = fs.readdir(folder, function(err, files){
-      if (err){
-        console.log(err);
-      }
-      else {
-        // Create a new array with only the files (not directories) in the directory
-        var fileArray = [];
-        files.forEach(function(item){
-          if (fs.lstatSync(folder + "/" + item).isFile() === true){
-            fileArray.push(item);
-          }
-        });
-        // Send these back to the frontend
-        socket.emit('file-list', fileArray);
-      };
-    });
+    // If the folder is not null
+    if (folder !== null) {
+      // Fetch the file list
+      var fileList = fs.readdir(folder, function(err, files){
+        if (err){
+          console.log(err);
+        }
+        else {
+          // Create a new array with only the files (not directories) in the directory
+          var fileArray = [];
+          files.forEach(function(item){
+            if (fs.lstatSync(folder + "/" + item).isFile() === true){
+              fileArray.push(item);
+            }
+          });
+          // Send these back to the frontend
+          socket.emit('file-list', fileArray);
+        };
+      });
+    };
   });
 
   // Listen for status requests

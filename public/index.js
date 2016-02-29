@@ -73,38 +73,12 @@ $(document).ready(function(){
   var folder = getQueryVariable('folder');
   $("input#folder").val(folder);
 
-  // Click the get files button
-  $("button#file-list").click();
+  // Get the files if they exist
+  getFiles(socket);
 
   // Add a handler for the button which requests the folder list
   $("button#file-list").click(function(){
-    socket.emit('get-files', folder);
-
-    // Handle the response from the server with the file list
-    socket.on('file-list', function(fileArray){
-      // Remove all elements from the list
-      $("div#file-list ul").empty();
-      // Create the required li entries for files in the list
-      for (var i=0; i < fileArray.length; i++) {
-        var $listItem = $("<li>", {class: 'ui-state-default'}).text(fileArray[i]);
-        // Create an icon element
-        var $icon = $("<i>", {class: 'material-icons'}).text('reorder');
-        // Add an icon inside to signify that they can be reordered
-        $listItem.prepend($icon);
-        $("div#file-list ul").append($listItem);
-      };
-
-      // Allow the clicking on the list items to toggle whether they are sortable
-      $("div#file-list ul li").click(function(){
-        $(this).toggleClass('ui-state-disabled');
-
-        // Make the ul sortable based on new disable items
-        $( "#sortable" ).sortable({
-          items: "li:not(.ui-state-disabled)"
-        });
-        $( "#sortable li" ).disableSelection();
-      });
-    });
+    getFiles(socket);
   });
 
   // Add a handler for the folder select button to take you to the folder browser
@@ -154,5 +128,37 @@ $(document).ready(function(){
     window.location.replace('/public/shutdown.html')
     socket.emit('shutdown');
   });
+
+  function getFiles(socket) {
+
+    socket.emit('get-files', folder);
+
+    // Handle the response from the server with the file list
+    socket.on('file-list', function(fileArray){
+      // Remove all elements from the list
+      $("div#file-list ul").empty();
+      // Create the required li entries for files in the list
+      for (var i=0; i < fileArray.length; i++) {
+        var $listItem = $("<li>", {class: 'ui-state-default'}).text(fileArray[i]);
+        // Create an icon element
+        var $icon = $("<i>", {class: 'material-icons'}).text('reorder');
+        // Add an icon inside to signify that they can be reordered
+        $listItem.prepend($icon);
+        $("div#file-list ul").append($listItem);
+      };
+
+      // Allow the clicking on the list items to toggle whether they are sortable
+      $("div#file-list ul li").click(function(){
+        $(this).toggleClass('ui-state-disabled');
+
+        // Make the ul sortable based on new disable items
+        $( "#sortable" ).sortable({
+          items: "li:not(.ui-state-disabled)"
+        });
+        $( "#sortable li" ).disableSelection();
+      });
+    });
+ 
+  };
 
 });
