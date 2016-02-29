@@ -28,14 +28,6 @@ $(document).ready(function(){
       $("button#pause").removeAttr('disabled');
       $("button#stop").removeAttr('disabled');
 
-      // Ensure the loop checkbox reflects the current state
-      if (response.loop === true){
-        $("#loop-checkbox").prop('checked', true);
-      }
-      else {
-        $("#loop-checkbox").prop('checked', false);
-      };
-
       // Get the list of videos and populate the 'now playing' list
       //
       // First, empty the list
@@ -89,7 +81,7 @@ $(document).ready(function(){
   // Add a handler for the play button
   $("button#play").click(function(){
     // Make an empty list
-    var playList = [];
+    var playlist = [];
     // Get the list of files
     var $fileList = $("div#file-list ul li");
     // For each of them
@@ -97,7 +89,7 @@ $(document).ready(function(){
       // If the item is not disabled
       if($(li).hasClass('ui-state-disabled') === false){
         // Push it onto the list
-        playList.push($(li).text().substring(7));
+        playlist.push($(li).text().substring(7));
       };
     });
     // Finally, push the list to the backend, along with the associated options
@@ -109,7 +101,7 @@ $(document).ready(function(){
     var delay = $("#delay").val();
     // The current folder
     var folder = $("input#folder").val();
-    var returnObj = {playlist: playList, loop: loopStatus, folder: folder, audioOutput: audioSelect, delay: delay};
+    var returnObj = {playlist: playlist, loop: loopStatus, folder: folder, audioOutput: audioSelect, delay: delay};
     socket.emit('play', returnObj);
   });
 
