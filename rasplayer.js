@@ -58,18 +58,19 @@ io.on('connection', function (socket){
     var statusResponse = omx.getStatus();
     // If either we're playing or we're stopped
     if (statusResponse.loaded === false || statusResponse.playing === true){
+      // Set up a variable to hold the loaded response
+      var currentResponse;
       // Check the frontend response for the resume bit, and replace the frontendResponse with the saved one 
       // if it's present
       if (frontendResponse.resume === true) {
-        fs.readFileSync('/home/niksko/.rasplayer.resume', (err, data) => {
-          frontendResponse = JSON.parse(data);
-        });
+        var data = fs.readFileSync('/home/niksko/.rasplayer.resume', 'utf8');
+        frontendResponse = JSON.parse(data);
       }
       // If it's not
       else {
         // Write the frontendResponse to a file for later resuming
         var frontendString = JSON.stringify(frontendResponse);
-        fs.writeFileSync('/home/niksko/.rasplyer.resume', frontendString);
+        fs.writeFileSync('/home/niksko/.rasplayer.resume', frontendString, 'utf8');
       };
       // Set the video directory based on the folder from the response object
       omx.setVideosDirectory(frontendResponse.folder);
