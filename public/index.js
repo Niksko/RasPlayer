@@ -72,18 +72,27 @@ $(document).ready(function(){
   // Extract the folder from the query string and set the folder box based on this
   var folder = getQueryVariable('folder');
   $("input#folder").val(folder);
+  function getFolder() {
+    return folder;
+  }
 
   // Get the files if they exist
   getFiles(socket);
 
   // Add a handler for the button which requests the folder list
   $("button#file-list").click(function(){
+    folder = $("input#folder").val();
     getFiles(socket);
   });
 
   // Add a handler for the folder select button to take you to the folder browser
   $("button#folder-select").click(function(){
     window.location.replace("/filesystem");
+  });
+
+  $("button#select-stream").click(function(){
+    streamPath = $("input#folder").val();
+    getStream(socket);
   });
 
   // Add a handler for the play button
@@ -97,7 +106,11 @@ $(document).ready(function(){
       // If the item is not disabled
       if($(li).hasClass('ui-state-disabled') === false){
         // Push it onto the list
-        playList.push($(li).text().substring(7));
+        if ($(li).text().startsWith("reorder")) {
+          playList.push(getFolder() + "/" + $(li).text().substring(7));
+	} else {
+          playList.push($(li).text());
+	}
       };
     });
     // Finally, push the list to the backend, along with the associated options
@@ -128,6 +141,13 @@ $(document).ready(function(){
     window.location.replace('/public/shutdown.html')
     socket.emit('shutdown');
   });
+
+  function getStream(socket) {
+    $("div#file-list ul").empty();
+    var stream = $("input#folder").val();
+    var listItem = $("<li>", {class: 'ui-state-default'}).text(stream);
+    $("div#file-list ul").append(listItem);
+  };
 
   function getFiles(socket) {
 
