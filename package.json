@@ -5,7 +5,7 @@
   "dependencies": {
     "express": "^4.13.4",
     "http": "0.0.0",
-    "omx-manager": "0.0.3",
+    "omx-manager": "0.1.4",
     "serve-index": "^1.7.3",
     "socket.io": "^1.4.5"
   },

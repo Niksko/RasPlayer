@@ -7,7 +7,10 @@ var io = require('socket.io')(http);
 var serveIndex = require('serve-index');
 const fs = require('fs');
 
-var omx = require('omx-manager');
+var OmxManager = require('omx-manager');
+var omx = new OmxManager();
+// Use this variable as a storage point for the active video
+var player = null;
 
 // Add all of our routes
 require('./routes.js')(app);
@@ -49,17 +52,22 @@ io.on('connection', function (socket){
 
   // Listen for status requests
   socket.on('get-status', function(){
-    sendStatus(omx, socket);
+    sendStatus(player, socket);
   });
 
   // Listen for play requests
   socket.on('play', function(response){
     // Get the player status
-    var statusResponse = omx.getStatus();
+    var statusResponse = {};
+    if (player != null) {
+      statusResponse = player.getStatus();
+    }
     // If either we're playing or we're stopped
-    if (statusResponse.loaded === false || statusResponse.playing === true){
+    if (player === null || statusResponse.playing === false){
       // Set the video directory based on the folder from the response object
-      omx.setVideosDirectory(response.folder);
+      if (response.folder.startsWith("/")) {
+        omx.setVideosDirectory(response.folder);
+      }
       // Interpret the delay
       var delayTime = parseInt(response.delay);
       if (isNaN(delayTime)){
@@ -74,7 +82,7 @@ io.on('connection', function (socket){
     }
     // We're paused, so just unpause
     else {
-      omx.play();
+      player.play();
     };
   });
 
@@ -83,13 +91,13 @@ io.on('connection', function (socket){
     // Remove any other stop listeners that were added by the manual player
     omx.removeListener('stop', stopTimer);
     // Stop omx
-    omx.stop();
+    player.stop();
   });
 
   socket.on('shutdown', function(){
     // Stop the omxplayer and exit the node instance after two seconds, just to allow time to serve the shutdown page
     setTimeout(function (){
-      omx.stop();
+      player.stop();
       process.exit();
     }, 2000);
   });
@@ -101,13 +109,13 @@ io.on('connection', function (socket){
 
   // Listen for play, pause and stop actions on the omx and send status updates to the frontend
   omx.on('play', function(){
-    sendStatus(omx, socket);
+    sendStatus(player, socket);
   });
   omx.on('stop', function(){
-    sendStatus(omx, socket);
+    sendStatus(player, socket);
   });
   omx.on('pause', function(){
-    sendStatus(omx, socket);
+    sendStatus(player, socket);
   });
 });
 
@@ -115,9 +123,12 @@ http.listen(3000, function(){
   console.log('listening on localhost:3000');
 });
 
-function sendStatus(omx, socket) {
+function sendStatus(camera, socket) {
+    var response = {}
     // Get status and respond via socket
-    var response = omx.getStatus();
+    if (camera != null) {
+      var response = camera.getStatus();
+    }
     // Correct the loop status depending on the internal omx loop status obtained from the frontend (if it exists)
     if (omx.response !== undefined && response.settings !== undefined){
       response.loop = omx.response.loop;
@@ -127,7 +138,8 @@ function sendStatus(omx, socket) {
 
 function manualPlay(omx) {
   // Play the video
-  omx.play(omx.response.playlist[omx.nextVideo], {'-o': omx.response.audioOutput, '--display': 5});
+  player = omx.create(omx.response.playlist[omx.nextVideo], {'-o': omx.response.audioOutput, '--display': 5, '-b': true});
+  player.play();
   // Update the current video
   omx.nextVideo = omx.nextVideo + 1;
   // If we're looping or we haven't reached the end of the list of videos
